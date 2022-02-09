@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
+use App\Services\EvenTeamCountCalculator;
 use App\User;
-use App\Services\TeamCountCalculator;
 use Tests\TestCase;
 
 class PlayersIntegrityTest extends TestCase
@@ -27,7 +27,7 @@ class PlayersIntegrityTest extends TestCase
 	    calculate how many teams can be made so that there is an even number of teams and they each have between 18-22 players.
 	    Then check that there are at least as many players who can play goalie as there are teams
         */
-        $teamCountCalculator = new TeamCountCalculator;
+        $teamCountCalculator = new EvenTeamCountCalculator;
         $playerCount = User::where('user_type', 'player')->count();
         $goaliesCount = User::where('user_type', 'player')->where('can_play_goalie', 1)->count();
         $teamsQty = $teamCountCalculator->calculate($playerCount, 22, 18);

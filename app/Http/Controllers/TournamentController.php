@@ -13,7 +13,7 @@ class TournamentController extends Controller
         /** @var Collection */
         $players =  User::ofPlayers()->get();
 
-        return view('tournament', [
+        return response()->json([
             'teams' => $teamsBuilder->generate($players)
                 ->map(fn ($team) => [
                     'name' => $faker->streetName,
